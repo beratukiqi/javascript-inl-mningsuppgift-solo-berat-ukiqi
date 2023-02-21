@@ -14,6 +14,14 @@ export async function fetchPlanet(id) {
 }
 
 export async function renderPlanetData(id) {
+    // Hides all planet data from UI before rendering new data
+    let planetBlocksBefore = document.querySelectorAll('.fadeInDown');
+    ('use strict');
+    planetBlocksBefore.forEach((block) => {
+        block.classList.remove('fadeInDown');
+        block.classList.add('hidden');
+    });
+
     // Render UI for each planet that is passed in
     let planetData = document.querySelector('.data__list');
     let planetHeader = document.querySelector('.planet__header');
@@ -71,4 +79,14 @@ export async function renderPlanetData(id) {
             })
             .join('')}
     </ul>`;
+
+    // Stagger planet animation on render
+    let planetBlocks = document.querySelectorAll('.hidden');
+    ('use strict');
+    planetBlocks.forEach((block, id) => {
+        setTimeout(() => {
+            block.classList.remove('hidden');
+            block.classList.add('fadeInDown');
+        }, 150 * id);
+    });
 }

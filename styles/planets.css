@@ -174,3 +174,55 @@ i {
     font-size: 2rem;
     color: #16182a;
 }
+
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+.hidden{
+    opacity: 0;
+}
+
+.fadeInDown {
+    animation: fadeInUp 0.3s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.fadeInDown {
+    animation: fadeInDown 0.7s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.fadeOutUp {
+    animation: fadeOutUp 0.5s ease-in-out;
+    animation-fill-mode: backwards;
+}
+

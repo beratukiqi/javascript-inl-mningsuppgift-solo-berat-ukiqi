@@ -1,23 +1,23 @@
-let currentPlanet = 3;
-
 import { renderPlanetData } from './planets.js';
 
+let currentPlanet = 3;
 let planets = document.querySelectorAll('.planets li a div');
 let planetIconList = document.querySelectorAll('.planets li a i');
-let planetTextList = document.querySelectorAll('.planets li a p');
 let prevButton = document.querySelector('.pagination__back');
 let nextButton = document.querySelector('.pagination__next');
 
+// Handler events for each planet
 planets.forEach((planet, id) => {
-    // Displays the icon and text when hovering over the planet
     planet.addEventListener('mouseover', () => {
-        planetIconList[id].style.display = 'block';
-        planetTextList[id].style.display = 'block';
+        planetIconList[id].classList.remove('fadeOutUp');
+        planetIconList[id].classList.remove('hidden');
+        planetIconList[id].classList.add('fadeInUp');
     });
 
     planet.addEventListener('mouseleave', () => {
-        planetIconList[id].style.display = 'none';
-        planetTextList[id].style.display = 'none';
+        planetIconList[id].classList.remove('fadeInUp');
+        planetIconList[id].classList.add('fadeOutUp');
+        planetIconList[id].classList.add('hidden');
     });
 
     // Send the id of the planet to the local storage when clicked
@@ -85,6 +85,16 @@ function handlePlanetColor(id) {
 // Gets the current planet from local storage and renders it on load
 window.onload = () => {
     currentPlanet = localStorage.getItem('planetID');
+    // Stagger planet animation on load
+    let planetTextList = document.querySelectorAll('.planets li a p');
+    ('use strict');
+    planetTextList.forEach((planet, id) => {
+        setTimeout(() => {
+            planet.classList.remove('hidden');
+            planet.classList.add('fadeInDown');
+        }, 120 * id);
+    });
+
     handlePlanetColor(currentPlanet);
     if (currentPlanet === 1) {
         prevButton.style.display = 'none';
@@ -94,7 +104,10 @@ window.onload = () => {
     renderPlanetData(currentPlanet);
 };
 
+// Handles the prev buttons
 prevButton.addEventListener('click', () => {
+    window.scrollTo(0, 0);
+
     // Handles the button displays
     console.log(currentPlanet, 'pre click');
     if (currentPlanet === 1) {
@@ -110,7 +123,9 @@ prevButton.addEventListener('click', () => {
     renderPlanetData(currentPlanet);
 });
 
+// Handles the prev buttons
 nextButton.addEventListener('click', () => {
+    window.scrollTo(0, 0);
     // Handles the button displays
     console.log(currentPlanet, 'pre click');
 

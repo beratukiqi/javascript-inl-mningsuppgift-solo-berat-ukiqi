@@ -12,7 +12,6 @@ body {
     padding: 0;
     height: 100vh;
     overflow: hidden;
-
 }
 
 header {
@@ -74,11 +73,10 @@ main {
     align-items: center;
     scale: 1;
     gap: 1rem;
+    text-decoration: none;
 }
 .planets li:hover {
     cursor: pointer;
-    scale: 1.1;
-    transition: all 0.3 ease-in-out;
 }
 .planets li p {
     font-size: 0.8rem;
@@ -157,3 +155,57 @@ i {
     height: 2.7rem;
     border-radius: 50%;
 }
+
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        rotate: 180deg;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        rotate: 200deg;
+        transform: translateY(20px);
+    }
+}
+.hidden{
+    opacity: 0;
+}
+
+.fadeInUp {
+    animation: fadeInUp 0.3s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.fadeInDown {
+    animation: fadeInDown 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.fadeOutUp {
+    animation: fadeOutUp 0.5s ease-in-out;
+    animation-fill-mode: backwards;
+}
+
