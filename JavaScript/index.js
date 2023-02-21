@@ -2,8 +2,24 @@ let currentPlanet = 3;
 
 import { renderPlanetData } from './planets.js';
 
-let planets = document.querySelectorAll('.planets li a');
+let planets = document.querySelectorAll('.planets li a div');
+let planetIconList = document.querySelectorAll('.planets li a i');
+let planetTextList = document.querySelectorAll('.planets li a p');
+let prevButton = document.querySelector('.pagination__back');
+let nextButton = document.querySelector('.pagination__next');
+
 planets.forEach((planet, id) => {
+    // Displays the icon and text when hovering over the planet
+    planet.addEventListener('mouseover', () => {
+        planetIconList[id].style.display = 'block';
+        planetTextList[id].style.display = 'block';
+    });
+
+    planet.addEventListener('mouseleave', () => {
+        planetIconList[id].style.display = 'none';
+        planetTextList[id].style.display = 'none';
+    });
+
     // Send the id of the planet to the local storage when clicked
     planet.addEventListener('click', () => {
         currentPlanet = id + 1;
@@ -66,8 +82,8 @@ function handlePlanetColor(id) {
     }
 }
 
+// Gets the current planet from local storage and renders it on load
 window.onload = () => {
-    // Gets the current planet from local storage and renders it
     currentPlanet = localStorage.getItem('planetID');
     handlePlanetColor(currentPlanet);
     if (currentPlanet === 1) {
@@ -77,9 +93,6 @@ window.onload = () => {
     }
     renderPlanetData(currentPlanet);
 };
-
-let prevButton = document.querySelector('.pagination__back');
-let nextButton = document.querySelector('.pagination__next');
 
 prevButton.addEventListener('click', () => {
     // Handles the button displays
@@ -112,20 +125,3 @@ nextButton.addEventListener('click', () => {
     handlePlanetColor(currentPlanet);
     renderPlanetData(currentPlanet);
 });
-
-// {
-//     id: 2,
-//     type: 'planet',
-//     name: 'Venus',
-//     latinName: 'Venus',
-//     rotation: 116,
-//     circumference: 38025,
-//     temp: {
-//         day: 430,
-//         night: -173
-//     },
-//     distance: 10820000,
-//     orbitalPeriod: 225,
-//     desc: 'Venus har ...',
-//     moons: []
-// }
