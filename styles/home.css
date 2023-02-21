@@ -1,0 +1,159 @@
+* {
+    font-family: quasimoda, sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+header {
+    position: absolute;
+    top: 3rem;
+    right: 10rem;
+    text-align: right;
+    color: white;
+    font-size: 1.5rem;
+}
+
+header h1{
+    font-size: 3rem;
+    letter-spacing: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 2rem;
+}
+header h2 {
+    font-size: 1rem;
+    letter-spacing: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 1rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #16182a;
+}
+
+.planets {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 80%;
+    margin-left: auto;
+    padding-right: 7rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.planets li {
+    list-style: none;
+
+}
+
+.planets li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scale: 1;
+    gap: 1rem;
+}
+.planets li:hover {
+    cursor: pointer;
+    scale: 1.1;
+    transition: all 0.3 ease-in-out;
+}
+.planets li p {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-weight: 400;
+    color: white;
+}
+
+i {
+    rotate: 180deg;
+    font-size: 1.6rem;
+    color: white;
+}
+
+.sun {
+    margin: auto;
+    background-color: #F9C80E;
+    position: absolute;
+    right: 90%;
+    top: 50%;
+    bottom: 50%;
+    width: 50rem;
+    height: 90rem;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.mercurius {
+    background-color: #888888;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+.venus {
+    background-color: #E7CDCD;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.earth {
+    background-color: #428ED4;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+.mars {
+    background-color: #EF5F5F;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+}
+.jupiter {
+    background-color: #E29468;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+}
+.saturnus {
+    background-color: #C7AA72;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+}
+.uranus {
+    background-color: #C9D4F1;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.neptunus {
+    background-color: #7A91A7;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+}

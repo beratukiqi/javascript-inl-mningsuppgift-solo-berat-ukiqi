@@ -1,0 +1,176 @@
+* {
+    font-family: quasimoda, sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: #16182a;
+}
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 35vw;
+    color: white;
+}
+
+
+
+.planet {
+    margin: auto;
+    background-color: #f9c60e66;
+    position: absolute;
+    right: 90%;
+    top: -40rem;
+    width: 50rem;
+    height: 90rem;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+header {
+    margin-top: 7rem;
+}
+
+header h1{
+    font-size: 3rem;
+    letter-spacing: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 2rem;
+}
+header h2 {
+    font-size: 1rem;
+    letter-spacing: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 1rem;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-weight: 800;
+    margin: 1rem 0;
+}
+
+.planet__description {
+    padding: 4rem 0;
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 200%;
+}
+
+
+.data__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 0;
+} 
+
+.data__list li {
+    list-style: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    padding: 1rem 0;
+}
+
+.data__list li p {
+    font-weight: 200;
+    margin: 0;
+}
+
+.data__container {
+    border-top: 1px solid rgb(84, 84, 84);
+}
+
+.moons {
+    padding: 3rem 0;
+    border-top: 1px solid rgb(84, 84, 84);
+}
+
+.moons ul {
+    margin-bottom: 2rem;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+}
+
+/* New  */
+
+.nav-button {
+    padding: 1rem 1rem;
+    width: 5rem;
+    border-radius: 50rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border: none;
+    scale: 1;
+    rotation: 0;
+}
+
+.nav-button:hover{
+    cursor: pointer;
+    background-color: #f9c60e;
+    scale: 1.05;
+    rotate: 5deg;
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+.pagination {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 1.5rem;
+    z-index: 2;
+}
+
+.pagination__container{
+    display: flex;
+    justify-content: space-between;
+    width: 55vw;
+    margin: auto;
+}
+
+.pagination__container div {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.pagination__container div p {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    /* text-transform: uppercase; */
+}
+
+.pagination__next {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.pagination__back {
+    display: flex;
+    align-items: center;
+}
+
+
+i { 
+    padding: .5rem;
+    font-size: 2rem;
+    color: #16182a;
+}
