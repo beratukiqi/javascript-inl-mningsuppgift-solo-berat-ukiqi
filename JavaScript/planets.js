@@ -90,3 +90,20 @@ export async function renderPlanetData(id) {
         }, 150 * id);
     });
 }
+
+export function handlePrevButton(currentPlanet) {
+    window.scrollTo(0, 0);
+    // Handles the button displays
+    console.log(currentPlanet, 'pre click');
+    if (currentPlanet === 1) {
+        prevButton.style.display = 'none';
+    } else if (currentPlanet === 8) {
+        nextButton.style.display = 'revert';
+    }
+
+    currentPlanet--;
+    console.log(currentPlanet, 'post click');
+
+    handlePlanetColor(currentPlanet);
+    renderPlanetData(currentPlanet);
+}
