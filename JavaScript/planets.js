@@ -1,17 +1,15 @@
-let currentPlanet = 3;
-
-
-
-
 export async function fetchData() {
     let resp = await fetch('https://majazocom.github.io/Data/solaris.json');
+
     let data = await resp.json();
+    // console.log(data);
     return data;
 }
 
 export async function fetchPlanet(id) {
     let planets = await fetchData();
     let planet = planets.find((planet) => planet.id == id);
+    // console.log(planet, 'planet from FetchPlanet');
     return planet;
 }
 
@@ -82,7 +80,7 @@ export async function renderPlanetData(id) {
             .join('')}
     </ul>`;
 
-    // Stagger animation of planet info on render
+    // Stagger planet animation on render
     let planetBlocks = document.querySelectorAll('.hidden');
     ('use strict');
     planetBlocks.forEach((block, id) => {
@@ -92,113 +90,4 @@ export async function renderPlanetData(id) {
         }, 150 * id);
     });
 }
-
-
-// Handles the color changes for each planet
-export function handlePlanetColor(id) {
-    let planet = document.querySelector(`.planet`);
-
-    switch (id) {
-        case 0:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #F9C80E40';
-            planet.style.backgroundColor = '#F9C80E';
-            break;
-
-        case 1:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #88888840';
-            planet.style.backgroundColor = '#888888';
-            break;
-
-        case 2:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #E7CDCD40';
-            planet.style.backgroundColor = '#E7CDCD';
-            break;
-
-        case 3:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #428ED440';
-            planet.style.backgroundColor = '#428ED4';
-            break;
-
-        case 4:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #EF5F5F40';
-            planet.style.backgroundColor = '#EF5F5F';
-            break;
-
-        case 5:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #E2946840';
-            planet.style.backgroundColor = '#E29468';
-            break;
-
-        case 6:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #C7AA7240';
-            planet.style.backgroundColor = '#C7AA72';
-            break;
-
-        case 7:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #C9D4F140';
-            planet.style.backgroundColor = '#C9D4F1';
-            break;
-        case 8:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #7A91A740';
-            planet.style.backgroundColor = '#7A91A7';
-            break;
-
-        default:
-            planet.style.boxShadow = '5rem 0rem 50rem 0px #7A91A740';
-            planet.style.backgroundColor = '#7A91A7';
-            break;
-    }
-}
-
-// window.onload = () => {
-//     let currentPlanet = localStorage.getItem('planetID');
-   
-
-//     handlePlanetColor(currentPlanet);
-// // '    if (currentPlanet === 1) {
-// //         prevButton.style.display = 'none';
-// //     } else if (currentPlanet === 8) {
-// //         nextButton.style.display = 'none';
-// //     }'
-//     renderPlanetData(currentPlanet);
-//     createNavEventListeners();
-// };
-
-
-
-export function createNavEventListeners () {
-    let prevButton = document.querySelector('.pagination__back');
-    let nextButton = document.querySelector('.pagination__next');
-
-    // Handles the prev button
-    prevButton.addEventListener('click', () => {
-        window.scrollTo(0, 0);
-
-        if (currentPlanet === 1) {
-            prevButton.style.display = 'none';
-        } else if (currentPlanet === 8) {
-            nextButton.style.display = 'revert';
-        }
-    
-        currentPlanet--;
-        handlePlanetColor(currentPlanet);
-        renderPlanetData(currentPlanet);
-    });
-    
-    // Handles the next button
-    nextButton.addEventListener('click', () => {
-        window.scrollTo(0, 0);
-            
-        if (currentPlanet === 7) {
-            nextButton.style.display = 'none';
-        } else if (currentPlanet === 0) {
-            prevButton.style.display = 'revert';
-        }
-
-        currentPlanet++;
-        handlePlanetColor(currentPlanet);
-        renderPlanetData(currentPlanet);
-    });
-}
-
 
