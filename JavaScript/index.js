@@ -1,32 +1,34 @@
-import { renderPlanetData } from './planets.js';
+import { renderPlanetData, handlePrevButton } from './planets.js';
 
 let currentPlanet = 3;
-let planets = document.querySelectorAll('.planets li a div');
+let planets = document.querySelectorAll('.planets a');
 let planetIconList = document.querySelectorAll('.planets li a i');
-let prevButton = document.querySelector('.pagination__back');
+let planetLinks = document.querySelectorAll('.planets a');
 let nextButton = document.querySelector('.pagination__next');
 
-// Handler events for each planet
-planets.forEach((planet, id) => {
-    planet.addEventListener('mouseover', () => {
-        planetIconList[id].classList.remove('fadeOutUp');
-        planetIconList[id].classList.remove('hidden');
-        planetIconList[id].classList.add('fadeInUp');
-    });
-
-    planet.addEventListener('mouseleave', () => {
-        planetIconList[id].classList.remove('fadeInUp');
-        planetIconList[id].classList.add('fadeOutUp');
-        planetIconList[id].classList.add('hidden');
-    });
-
-    // Send the id of the planet to the local storage when clicked
+// Send the id of the planet to the local storage when clicked
+planetLinks.forEach((planet, id) => {
     planet.addEventListener('click', () => {
         currentPlanet = id + 1;
         localStorage.setItem('planetID', currentPlanet);
     });
 });
+// Handles hover effect for each planet
+planets.forEach((planet, id) => {
+    planet.addEventListener('mouseover', () => {
+        planetIconList[id].classList.remove('fadeOutUp');
+        planetIconList[id].classList.remove('hidden');
+        planetIconList[id].classList.add('fadeInDownIcon');
+    });
 
+    planet.addEventListener('mouseleave', () => {
+        planetIconList[id].classList.remove('fadeInDownIcon');
+        planetIconList[id].classList.add('fadeOutUp');
+        planetIconList[id].classList.add('hidden');
+    });
+});
+
+// Handles the color changes for each planet
 function handlePlanetColor(id) {
     let planet = document.querySelector(`.planet`);
 
@@ -86,7 +88,7 @@ function handlePlanetColor(id) {
 window.onload = () => {
     currentPlanet = localStorage.getItem('planetID');
     // Stagger planet animation on load
-    let planetTextList = document.querySelectorAll('.planets li a p');
+    let planetTextList = document.querySelectorAll('.planets p');
     ('use strict');
     planetTextList.forEach((planet, id) => {
         setTimeout(() => {
@@ -103,32 +105,17 @@ window.onload = () => {
     }
     renderPlanetData(currentPlanet);
 };
-
+let prevButton = document.querySelector('.pagination__back');
+prevButton.addEventListener('click', handlePrevButton(currentPlanet));
 // Handles the prev buttons
-prevButton.addEventListener('click', () => {
-    window.scrollTo(0, 0);
-
-    // Handles the button displays
-    console.log(currentPlanet, 'pre click');
-    if (currentPlanet === 1) {
-        prevButton.style.display = 'none';
-    } else if (currentPlanet === 8) {
-        nextButton.style.display = 'revert';
-    }
-
-    currentPlanet--;
-    console.log(currentPlanet, 'post click');
-
-    handlePlanetColor(currentPlanet);
-    renderPlanetData(currentPlanet);
-});
+// handlePrevButton(prevButton);
 
 // Handles the prev buttons
 nextButton.addEventListener('click', () => {
     window.scrollTo(0, 0);
     // Handles the button displays
-    console.log(currentPlanet, 'pre click');
-
+    console.s   zzzzzlog(currentPlanet, 'pre click');
+        cz
     if (currentPlanet === 7) {
         nextButton.style.display = 'none';
     } else if (currentPlanet === 0) {
