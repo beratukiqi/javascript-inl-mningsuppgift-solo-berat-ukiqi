@@ -7,6 +7,7 @@ let planetLinks = document.querySelectorAll('.planets a');
 let nextButton = document.querySelector('.pagination__next');
 let prevButton = document.querySelector('.pagination__back');
 let searchInput = document.querySelector('#search-input');
+let resultsContainer = document.querySelector('.search__results');
 let clearButton = document.querySelector('#clear-btn');
 
 async function getData () {
@@ -31,6 +32,7 @@ function handleKeyPress () {
             let searchValue = searchInput.value;
             console.log(searchValue);
             generateSearchResults(searchValue)
+            resultsContainer.classList.add('fadeInUp');
         }
 
     });
@@ -42,22 +44,36 @@ function handleSearchButton() {
         let searchValue = searchInput.value;
         console.log(searchValue);
         generateSearchResults(searchValue)
+        resultsContainer.classList.add('fadeInUp');
+
     });
 }
 
 // Handle input to check if letters are included in planets name
 async function generateSearchResults(value) {
+    let match = false;
+    let planetData = await getData();
+    let results = [];
+
+    // Checks minimun length of input
     if (value.length >= 3) {
-        let planetData = await getData();
         planetData.forEach((planet) => {
             if (planet.name.toUpperCase().includes(value.toUpperCase())) {
+                results.push(planet);
                 console.log(planet);
-            }
+                resultsContainer.style.display = '';
+                renderSearchResults(planet)
+                match = true;
+            } 
         });
-    }  else {
-        console.log('Please enter more than 2 letters');
+        if (!match) {
+            console.log('No match found');
+        }
+    } else {
+        console.log('Please enter minimum 3 letters');
     }
 }
+        
 
 function addHoverEffect(list) {
     list.forEach((planet, id) => {
@@ -202,7 +218,35 @@ window.onload = () => {
     handleLocalStorate(planets);
 };
 
+function renderSearchResults(results) {
+    let container = document.querySelector('.search__results');
+    
 
+    results.name ? container.innerHTML = `
+        <h3>${results.name}</h3>
+        <p>Only ${results.distance} km away,<br/>you up for it?</p>    
+        <a href="/planets.html">
+            <button class="results__button">Let's go there<i class="fa-solid fa-rocket"></i></button>
+        </a>` : container.innerHTML = "No results found";
+    
+        let header = document.querySelector('.search__results h3');
+        let text = document.querySelector('.search__results p');
+        let button = document.querySelector('.results__button');
+    
+
+    // Hide the search result container when the user clicks outside of it
+    window.addEventListener('click', (e) => {
+        if (e.target !== container &&
+            e.target !== header &&
+            e.target !== text &&
+            e.target !== button &&
+            e.target !== searchInput) {
+            resultsContainer.style.display = 'none';
+            clearButton.style.display = 'none';
+        }
+    });
+   
+}
 
 addHoverEffect(planets);
 handleKeyPress();
@@ -214,5 +258,6 @@ clearButton.addEventListener('click', () => {
     console.log('clicked');
     let inputField = document.getElementById('search-input');
     inputField.value = '';
+    resultsContainer.style.display = 'none';
     clearButton.style.display = 'none';
 });

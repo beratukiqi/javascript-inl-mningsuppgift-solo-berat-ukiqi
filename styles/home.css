@@ -15,7 +15,9 @@ body {
 }
 
 .search {
-    width: 500px;
+    position: absolute;
+    top: 15rem;
+    width: 40rem;
     height: 2rem;
     background-color: white;
     border-radius: 50rem;
@@ -108,7 +110,81 @@ input:focus {
 
 .search__bar i:hover {
     color: #16182aea;
+}
 
+
+.search__results {
+    position: absolute;
+    z-index: 1;
+    bottom: 8rem;
+    margin-top: 1rem;
+    background-color: white;
+    width: 40rem;
+    padding: 3rem 1rem;
+    border-radius: 2rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease-out;
+    transform-origin: top;
+}
+
+
+
+.search__results h3 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5rem;
+    font-weight: 800;
+    color: #16182a;
+    margin: 0;
+    margin-top: 1rem;
+}
+
+.search__results p {
+    color: #16182a;
+    text-align: center;
+    width: 50%;
+    padding: 3rem 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 200%;
+}
+
+
+.search__results a {
+    text-decoration: none;
+}
+
+
+.results__button {
+    display: flex;
+    align-items: center;
+    border: none;
+    gap: 0.8rem;
+    padding: 1rem 5rem;
+    cursor: pointer;
+    border-radius: 50rem;
+    background-color: #16182a;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-weight: 800;
+    border: none;
+}
+
+.results__button i {
+    rotate: 45deg;
+}
+
+.results__planet {
+    background-color: #428ED4;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    
 }
 
 header {
@@ -160,7 +236,6 @@ main {
 
 .planets li {
     list-style: none;
-
 }
 
 .planets li a {
