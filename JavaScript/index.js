@@ -45,7 +45,6 @@ function handleSearchButton() {
         console.log(searchValue);
         generateSearchResults(searchValue)
         resultsContainer.classList.add('fadeInUp');
-
     });
 }
 
@@ -54,6 +53,8 @@ async function generateSearchResults(value) {
     let match = false;
     let planetData = await getData();
     let results = [];
+    let notFoundMessage = document.querySelector('.not-found');
+    let errorMessage = document.querySelector('.error');
 
     // Checks minimun length of input
     if (value.length >= 3) {
@@ -64,13 +65,17 @@ async function generateSearchResults(value) {
                 resultsContainer.style.display = '';
                 renderSearchResults(planet)
                 match = true;
+                notFoundMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
             } 
         });
         if (!match) {
-            console.log('No match found');
+            errorMessage.style.display = 'none';
+            notFoundMessage.style.display = '';
         }
     } else {
-        console.log('Please enter minimum 3 letters');
+        notFoundMessage.style.display = 'none';
+        errorMessage.style.display = '';
     }
 }
         
@@ -92,7 +97,7 @@ function addHoverEffect(list) {
 }
 
 // Send the id of the planet to the local storage when clicked
-function handleLocalStorate(list) {
+function handleLocalStorage(list) {
     list.forEach((planet, id) => {
         planet.addEventListener('click', () => {
             currentPlanet = id + 1;
@@ -212,28 +217,47 @@ window.onload = () => {
     // } else if (currentPlanet === 8) {
     //     nextButton.style.display = 'none';
     // }
+    handleLocalStorage(planets);
     addPrevButtonListener()
     addNextButtonListener()
     renderPlanetData(currentPlanet);
-    handleLocalStorate(planets);
 };
 
 function renderSearchResults(results) {
     let container = document.querySelector('.search__results');
-    
+    let errorMessage = document.querySelector('.error');
+    let notFoundMessage = document.querySelector('.not-found');
+   
 
-    results.name ? container.innerHTML = `
+    // Display error message if no results are found
+    if (results.length > 2) {
+        errorMessage.style.display = '';
+        console.log(results.length, 'results length worked');
+    } else if (!results.name) {
+        notFoundMessage.style.display = '';
+        console.log(results.name, 'results name worked');
+    } else {
+
+        container.innerHTML = `
         <h3>${results.name}</h3>
         <p>Only ${results.distance} km away,<br/>you up for it?</p>    
         <a href="/planets.html">
             <button class="results__button">Let's go there<i class="fa-solid fa-rocket"></i></button>
-        </a>` : container.innerHTML = "No results found";
-    
-        let header = document.querySelector('.search__results h3');
-        let text = document.querySelector('.search__results p');
-        let button = document.querySelector('.results__button');
-    
+        </a>`
 
+        
+    
+    }
+
+    // Gets the elements if they exist / after they are created
+    let button = document.querySelector('.results__button');
+    let header = document.querySelector('.search__results h3');
+    let text = document.querySelector('.search__results p');
+    let CTALink = document.querySelector('.search__results a');
+    CTALink.addEventListener('click', () => {
+        localStorage.setItem('planetID', results.id);
+    });
+    
     // Hide the search result container when the user clicks outside of it
     window.addEventListener('click', (e) => {
         if (e.target !== container &&
@@ -242,7 +266,6 @@ function renderSearchResults(results) {
             e.target !== button &&
             e.target !== searchInput) {
             resultsContainer.style.display = 'none';
-            clearButton.style.display = 'none';
         }
     });
    
@@ -255,7 +278,11 @@ handleSearchButton()
 
 // // // Clear input fields
 clearButton.addEventListener('click', () => {
-    console.log('clicked');
+    let errorMessage = document.querySelector('.error');
+    let notFoundMessage = document.querySelector('.not-found');
+    errorMessage.style.display = 'none';
+    notFoundMessage.style.display = 'none';
+
     let inputField = document.getElementById('search-input');
     inputField.value = '';
     resultsContainer.style.display = 'none';
