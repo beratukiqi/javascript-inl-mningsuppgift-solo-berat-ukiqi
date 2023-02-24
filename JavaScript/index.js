@@ -12,15 +12,6 @@ let errorMessage = document.querySelector('.error');
 let notFoundMessage = document.querySelector('.not-found');
 
 let charsToCheck =  []; // Lista med bokstäver som ska matchas mot planetnamnet (Vill enbart ha dom som matchar rätt indexposition)
-let inputValue = 'ju'; // 'ju' matchar   -- 'piter' (matchar inte)
-let planetName = 'jupiter'; 
-
-// Skickar in alla bokstäver i inputvärden i en lista
-
-
-console.log(charsToCheck);
-
-
 
 async function getData () {
     const data = await fetchData();
@@ -34,8 +25,6 @@ async function generateSearchResults(value) {
     let notFoundMessage = document.querySelector('.not-found');
     let errorMessage = document.querySelector('.error');
     let noOfCharsMatched = 0;
-
-    
 
     // Handles the input value
     if (value.length >= 3) {
@@ -112,7 +101,6 @@ function renderSearchResults(results) {
             resultsContainer.style.display = 'none';
         }
     });
-   
 }
 
 // Adds click-listener and sends the id of the clicked planet to the local storage

@@ -5,12 +5,9 @@ let nextButton = document.querySelector('.pagination__next');
 let prevButton = document.querySelector('.pagination__back');
 let planetTextList = document.querySelectorAll('.planets p');
 
-
-
 async function renderPlanetData(id) {
     // Hides all planet data from UI before rendering new data
     let planetBlocksBefore = document.querySelectorAll('.fadeInDown');
-    ('use strict');
     planetBlocksBefore.forEach((block) => {
         block.classList.remove('fadeInDown');
         block.classList.add('hidden');
@@ -148,16 +145,6 @@ function handlePlanetColor(id) {
     }
 }
 
-currentPlanet = parseInt(localStorage.getItem('planetID'));
-console.log(currentPlanet, 'current planet');
-renderPlanetData(currentPlanet);
-
-// Removes buttons if user starts at end of list
-if (currentPlanet === 1) {
-    prevButton.style.display = 'none';
-} else if (currentPlanet === 8) {
-    nextButton.style.display = 'none';
-}
 
 planetTextList.forEach((planet, id) => {
     setTimeout(() => {
@@ -194,5 +181,12 @@ nextButton.addEventListener('click', () => {
         renderPlanetData(currentPlanet);
     });
 
-// handlePlanetColor(currentPlanet)
+currentPlanet = parseInt(localStorage.getItem('planetID'));
+renderPlanetData(currentPlanet);
 
+// Removes buttons if user starts at end of list
+if (currentPlanet === 1) {
+    prevButton.style.display = 'none';
+} else if (currentPlanet === 8) {
+    nextButton.style.display = 'none';
+}

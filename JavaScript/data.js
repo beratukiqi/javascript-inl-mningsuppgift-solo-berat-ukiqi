@@ -1,9 +1,11 @@
 export async function fetchData() {
-    let resp = await fetch('https://majazocom.github.io/Data/solaris.json');
-
-    let data = await resp.json();
-    // console.log(data);
-    return data;
+    try {
+        let resp = await fetch('https://majazocom.github.io/Data/solaris.json');
+        let data = await resp.json();
+        return data;
+    } catch (error) {
+        console.error("My friend, you have encountered an error. Error message: ", error);
+    }
 }
 
 export async function fetchPlanet(id) {
