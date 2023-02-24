@@ -11,6 +11,16 @@ let inputField = document.getElementById('search-input');
 let errorMessage = document.querySelector('.error');
 let notFoundMessage = document.querySelector('.not-found');
 
+let charsToCheck =  []; // Lista med bokstäver som ska matchas mot planetnamnet (Vill enbart ha dom som matchar rätt indexposition)
+let inputValue = 'ju'; // 'ju' matchar   -- 'piter' (matchar inte)
+let planetName = 'jupiter'; 
+
+// Skickar in alla bokstäver i inputvärden i en lista
+
+
+console.log(charsToCheck);
+
+
 
 async function getData () {
     const data = await fetchData();
@@ -23,17 +33,39 @@ async function generateSearchResults(value) {
     let planetData = await getData();
     let notFoundMessage = document.querySelector('.not-found');
     let errorMessage = document.querySelector('.error');
+    let noOfCharsMatched = 0;
+
+    
 
     // Handles the input value
     if (value.length >= 3) {
 
         // Loop through the planet data and check if the input matches any planet names
         planetData.forEach((planet) => {
+
             // Generates planet results if there is a match
             if (planet.name.toUpperCase().includes(value.toUpperCase())) {
-                resultsContainer.style.display = '';
-                renderSearchResults(planet)
-                match = true;
+
+                // Creates a list of all the characters in the input value
+                for (let i = 0; i < value.length; i++) {
+                    charsToCheck.push(value[i].toUpperCase());
+                }
+                // Checks if all the characters in the input value match the corresponding index position in the planet name
+                for (let i = 0; i < charsToCheck.length; i++) { 
+                    if (charsToCheck[i] === planet.name[i].toUpperCase()) { 
+                        noOfCharsMatched++;
+                    }
+                }
+
+                // Render results only if all chars are in correct corresponding index position
+                if (noOfCharsMatched === charsToCheck.length) {
+                    resultsContainer.style.display = '';
+                    renderSearchResults(planet)
+                    match = true;
+                } 
+
+                // Reset the charsToCheck array
+                charsToCheck = [];
             } 
         });
 
@@ -151,3 +183,5 @@ clearButton.addEventListener('click', () => {
     inputField.value = '';
     clearButton.style.display = 'none';
 });
+
+
